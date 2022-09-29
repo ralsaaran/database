@@ -1,0 +1,46 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://hackathon:H123h123@elm.bthszqd.mongodb.net/?retryWrites=true&w=majority
+      auto-index-creation: true
+servlet:
+  multipart:
+    enabled: true
+    file-size-threshold: 2MB
+    max-file-size: 10MB
+    max-request-size: 10MB
+
+cloud:
+  aws:
+    credentials:
+     access-key:
+     secret-key:
+    region:
+      static: us-east-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: elm
+
+security:
+  firebase-props:
+    enable-strict-server-session: false
+    enable-check-session-revoked: false
+    enable-logout-everywhere: false
+    session-expiry-in-days: 5
+  cookie-props:
+    max-age-in-minutes: 7200
+    http-only: true
+    secure: true
+    domain: elm-79e72h-149-79e72.firebaseapp.com
+    path: /
+  allow-credentials: true
+  config-file: /Users/hsmadi/Documents/firebase_config.json
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
