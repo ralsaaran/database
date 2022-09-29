@@ -31,13 +31,13 @@ public class UserController {
   }
 
   @PostMapping(value = "/image/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-  public void uploadUserImage(@PathVariable String id,
+  public void uploadUserImage(@PathVariable Long id,
                                                 @RequestPart MultipartFile userImage) {
     userService.uploadUserImage(userImage, id);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<User> updateUser(@PathVariable String id,
+  public ResponseEntity<User> updateUser(@PathVariable Long id,
                                          @RequestBody UserDto userDto) {
     User body = userService.update(userDto, id);
     return ResponseEntity.ok(body);

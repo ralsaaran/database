@@ -1,6 +1,6 @@
 package com.elm.hackathon.service.impl;
 
-import com.elm.hackathon.model.enums.Role;
+import com.elm.hackathon.model.enums.RoleEnum;
 import com.elm.hackathon.service.ProfileImageService;
 import com.elm.hackathon.service.UserService;
 import com.elm.hackathon.dto.UserDto;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User findOne(String id) {
+  public User findOne(Long id) {
     return userRepository.findById(id)
         .orElseThrow(() -> new RecordNotFoundException("User Not Found"));
   }
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User update(UserDto userDto, String id) {
+  public User update(UserDto userDto, Long id) {
     User user = findOne(id);
 
     user.setUsername(userDto.getUsername());
@@ -60,14 +60,14 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void uploadUserImage(MultipartFile userImage, String userId) {
+  public void uploadUserImage(MultipartFile userImage, Long userId) {
     profileImageService.uploadImage(userImage, userId, USER_PREFIX);
   }
 
   @Override
-  public void updateUserRole(String id, Role role) {
+  public void updateUserRole(Long id, RoleEnum role) {
     User updateMembership = findOne(id);
-    updateMembership.addRole(role);
+  //  updateMembership.addRole(role);
     userRepository.save(updateMembership);
   }
 }

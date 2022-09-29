@@ -1,11 +1,11 @@
 package com.elm.hackathon.exception;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.amazonaws.services.s3.model.AmazonS3Exception;
-import com.mongodb.MongoWriteException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -38,14 +38,14 @@ public class CustomGlobalExceptionHandler {
     return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(MongoWriteException.class)
-  public ResponseEntity<Object> handleException(MongoWriteException mongoWriteException) {
+  @ExceptionHandler(SQLException.class)
+  public ResponseEntity<Object> handleException(SQLException sqlException) {
 
     Map<String, Object> body = new LinkedHashMap<>();
     body.put("timestamp", new Date());
     body.put("status", HttpStatus.BAD_REQUEST);
-    body.put("message", mongoWriteException.getError().getMessage());
-    body.put("key", mongoWriteException.getError().getCategory());
+    body.put("message", sqlException.getMessage());
+    body.put("key", sqlException.getErrorCode());
 
     return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
   }

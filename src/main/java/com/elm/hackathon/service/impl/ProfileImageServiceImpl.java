@@ -31,7 +31,7 @@ public class ProfileImageServiceImpl implements ProfileImageService {
   private AmazonS3 s3Client;
 
   @Override
-  public void uploadImage(MultipartFile image, String id, String prefix) {
+  public void uploadImage(MultipartFile image, Long id, String prefix) {
     if (!Arrays.asList(ContentType.IMAGE_JPEG.getMimeType(), ContentType.IMAGE_PNG.getMimeType(),
         ContentType.IMAGE_GIF.getMimeType()).contains(image.getContentType())) {
       throw new IllegalStateException("File must be an Image");

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create_user_table" author="hbinmadhi">
+        <createTable tableName="user">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_id_pk" />
+            </column>
+            <column name="username" type="varchar(11)"/>
+            <column name="password" type="varchar(max)"/>
+            <column name="fullName" type="varchar(max)"/>
+            <column name="createdAt" type="varchar(max)"/>
+            <column name="modifiedAt" type="varchar(max)"/>
+            <column name="enable" type="bool"/>
+
+        </createTable>
+        <addNotNullConstraint
+                columnDataType="varchar(11)" columnName="username"
+                schemaName="dbo" tableName="user" />
+        <addNotNullConstraint
+                columnDataType="varchar(max)" columnName="password"
+                schemaName="dbo" tableName="user" />
+        <addNotNullConstraint
+                columnDataType="varchar(max)" columnName="fullName"
+                schemaName="dbo" tableName="user" />
+
+
+
+        <createTable tableName="role">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="role_id_pk" />
+            </column>
+            <column name="name" type="varchar(250)" />
+            <column name="createdAt" type="varchar(max)"/>
+            <column name="modifiedAt" type="varchar(max)"/>
+            <column name="enable" type="bool"/>
+        </createTable>
+
+
+        <createTable tableName="user_role">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="user_role_id_pk" />
+            </column>
+            <column name="fk_role_id" type="bigint" />
+            <column name="fk_user_id" type="bigint" />
+            <column name="createdAt" type="varchar(max)"/>
+            <column name="modifiedAt" type="varchar(max)"/>
+            <column name="enable" type="bool"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="fk_user_id"
+                                 constraintName="user_id_fk" referencedTableName="user" referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="fk_role_id"
+                                 constraintName="role_id_fk" referencedTableName="role" referencedColumnNames="id" />
+    </changeSet>
+</databaseChangeLog>

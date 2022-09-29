@@ -1,8 +1,14 @@
 spring:
-  data:
-    mongodb:
-      uri: mongodb+srv://hackathon:H123h123@elm.bthszqd.mongodb.net/?retryWrites=true&w=majority
-      auto-index-creation: true
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=hackathon
+    username: sa
+    password: Your_password123
+  jpa:
+   database: sql_server
+  show-sql: true
+  hibernate.ddl-auto: none
+  liquibase:
+   change-log: classpath:db/changelog/db.changelog-master.xml
 servlet:
   multipart:
     enabled: true

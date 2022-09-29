@@ -1,4 +1,4 @@
 package com.elm.hackathon.model.enums;
 
-public enum Role {
+public enum RoleEnum {
 }
